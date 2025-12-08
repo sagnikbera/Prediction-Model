@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-// Ensure this path is correct based on your folder structure
+import { FaLeaf } from "react-icons/fa";
 import homeBgImg from "../assets/homebg.jpg";
+import { GiZigzagLeaf } from "react-icons/gi";
+import { PageContext } from "../context/PageContext";
+import { useUser } from "@clerk/clerk-react";
 
 const Home = () => {
-  // Common styles for the rectangular boxes
+  const { lang } = useContext(PageContext);
+
+  const { user, isSignedIn } = useUser();
+
+  const content = {
+    ENG: {
+      cropTitle: "Crop Recommendation",
+      cropDesc: "Get analysis based on your soil and climate data.",
+      predictTitle: "Predict Disease",
+      predictDesc: "Upload images to identify potential crop diseases.",
+    },
+    BENG: {
+      cropTitle: "ফসলের সুপারিশ",
+      cropDesc: "আপনার মাটি এবং আবহাওয়ার তথ্যের ভিত্তিতে বিশ্লেষণ পান।",
+      predictTitle: "রোগ নির্ণয়",
+      predictDesc: "সম্ভাব্য ফসলের রোগ শনাক্ত করতে ছবি আপলোড করুন।",
+    },
+  };
+
+  const text = content[lang] || content.ENG;
+
+  const getWelcomeMessage = () => {
+    if (lang === "ENG") {
+      return isSignedIn && user?.firstName
+        ? `Welcome ${user.firstName} to Agri-Assist`
+        : "Welcome to Agri-Assist";
+    } else {
+      return isSignedIn && user?.firstName
+        ? `এগ্রি-অ্যাসিস্ট-এ স্বাগতম, ${user.firstName}`
+        : "এগ্রি-অ্যাসিস্ট-এ আপনাকে স্বাগতম";
+    }
+  };
+
   const boxClasses = `
     flex flex-col justify-center items-center 
     w-full md:w-80 h-52 
@@ -21,7 +56,7 @@ const Home = () => {
 
   return (
     <div className="relative h-[85vh] w-full flex flex-col justify-center items-center overflow-hidden">
-      {/* --- BACKGROUND LAYERS --- */}
+      {/*BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0 scale-110 transition-transform duration-1000"
         style={{
@@ -32,29 +67,31 @@ const Home = () => {
 
       <div className="absolute inset-0 bg-black/60 z-0"></div>
 
-      {/* --- CONTENT LAYER --- */}
       <div className="relative z-10 flex flex-col items-center w-full px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-12 drop-shadow-lg text-center">
-          Welcome to Agri-Assist
+          {getWelcomeMessage()}
         </h1>
 
-        {/* Grid Update: added 'place-items-center' 
-           This forces the boxes to center themselves within their grid cells.
-        */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full place-items-center">
           {/* --- Box 1: Crop Recommendation --- */}
           <Link to="/crop-recommendation" className={boxClasses}>
-            <h2 className={titleClasses}>Crop Recommendation</h2>
+            <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
+              <FaLeaf className="text-green-800 text-4xl" />
+            </div>
+            <h2 className={titleClasses}>{text.cropTitle}</h2>
             <p className="text-gray-700 text-center font-medium">
-              Get analysis based on your soil and climate data.
+              {text.cropDesc}
             </p>
           </Link>
 
           {/* --- Box 2: Predict Disease --- */}
           <Link to="/predict-disease" className={boxClasses}>
-            <h2 className={titleClasses}>Predict Disease</h2>
+            <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
+              <GiZigzagLeaf className="text-green-800 text-4xl" />
+            </div>
+            <h2 className={titleClasses}>{text.predictTitle}</h2>
             <p className="text-gray-700 text-center font-medium">
-              Upload images to identify potential crop diseases.
+              {text.predictDesc}
             </p>
           </Link>
         </div>

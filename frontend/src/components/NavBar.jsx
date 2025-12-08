@@ -1,39 +1,63 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // 1. Import Link
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { SiOverleaf } from "react-icons/si";
+import { PageContext } from "../context/PageContext";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const NavBar = () => {
-  const [language, setLanguage] = useState("ENG");
+  const { lang, setLang } = useContext(PageContext);
+
+  const navContent = {
+    ENG: {
+      brand: "Agri-Assist",
+      home: "Home",
+      feature: "Feature",
+      login: "Log In",
+    },
+    BENG: {
+      brand: "এগ্রি-অ্যাসিস্ট",
+      home: "হোম",
+      feature: "ফিচার",
+      login: "লগ ইন",
+    },
+  };
+
+  const text = navContent[lang] || navContent.ENG;
 
   return (
     <nav className="flex justify-between items-center px-8 py-4 bg-yellow-300 shadow-md text-lg">
-      {/* Left Side: Logo */}
-      <div className="text-4xl font-bold text-green-800 cursor-pointer">
-        Agri-Assist
+      {/* Left */}
+      <div className="text-4xl font-bold text-green-800 cursor-pointer flex">
+        <SiOverleaf />
+        <span className="ml-2">{text.brand}</span>
       </div>
 
-      {/* Right Side: Menu Items */}
+      {/* Right  */}
       <div className="flex items-center gap-6">
-        {/* 2. Updated Home Link */}
         <Link
           to="/"
           className="text-yellow-800 hover:text-yellow-600 transition-colors font-bold"
         >
-          Home
+          {text.home}
         </Link>
 
-        {/* 3. Updated Feature Link */}
         <Link
           to="/feature"
           className="text-yellow-800 hover:text-yellow-600 transition-colors font-bold"
         >
-          Feature
+          {text.feature}
         </Link>
 
-        {/* Language Dropdown */}
+        {/* Dropdown */}
         <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          className="px-3 py-1 border border-yellow-400 rounded-md text-sm bg-yellow-100 text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 font-semibold"
+          value={lang}
+          onChange={(e) => setLang(e.target.value)}
+          className="px-3 py-1 border border-yellow-400 rounded-md text-sm bg-yellow-100 text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 font-semibold cursor-pointer"
         >
           <option value="ENG" className="font-semibold">
             ENG
@@ -43,14 +67,27 @@ const NavBar = () => {
           </option>
         </select>
 
-        {/* Log In  */}
-        {/*
-        <Link
-        to="/"
-        className="py-1 px-6 text-white  bg-yellow-800 rounded-full font-bold"
-        >
-            Log In
-        </Link> */}
+        {/* Clerk  */}
+
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="bg-green-700 text-white px-4 py-1.5 rounded-full font-bold hover:bg-green-800 transition-all shadow-sm text-base">
+              {text.login}
+            </button>
+          </SignInButton>
+        </SignedOut>
+
+        {/* logged in */}
+        <SignedIn>
+          <UserButton
+            appearance={{
+              elements: {
+                avatarBox: "w-16 h-16",
+                avatarImage: "w-16 h-16",
+              },
+            }}
+          />
+        </SignedIn>
       </div>
     </nav>
   );
