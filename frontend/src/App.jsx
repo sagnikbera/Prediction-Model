@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import PredictDisease from "./pages/PredictDisease";
+import PdRice from "./pages/PdRice";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,7 +18,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/predict-disease" element={<PredictDisease/>}></Route>
+          <Route path="/predict-disease" element={<PredictDisease />}></Route>
+          <Route path="/predict-disease/rice" element={<PdRice />}></Route>
         </Routes>
         <Footer />
       </div>

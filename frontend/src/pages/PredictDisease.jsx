@@ -68,7 +68,6 @@ const PredictDisease = () => {
 
         {/* Grid Container - Changed to md:grid-cols-3 to fit 3 boxes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full place-items-center">
-          
           {/* --- Box 1: Rice --- */}
           <Link to="/predict-disease/rice" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
@@ -101,7 +100,6 @@ const PredictDisease = () => {
               {text.wheatDesc}
             </p>
           </Link>
-
         </div>
       </div>
     </div>
