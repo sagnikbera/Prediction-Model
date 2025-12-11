@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Map from "./Map";
 import { FaCloudUploadAlt, FaImage, FaTemperatureHigh, FaTint, FaCloudRain } from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
 import { PageContext } from "../context/PageContext";
 import { MdDeleteForever } from "react-icons/md";
 
-const PdRice = () => {
+const PdPotato = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   
@@ -15,24 +15,24 @@ const PdRice = () => {
   const [envData, setEnvData] = useState(null);
 
   const { lang } = useContext(PageContext);
-  const navigate = useNavigate(); // 2. Initialize Navigation Hook
+  const navigate = useNavigate();
 
-  // --- MOCK DATA FETCHING ---
+  // --- MOCK DATA FETCHING (Adjusted for Potato conditions) ---
   useEffect(() => {
     if (position) {
       setEnvData({
-        temp: "32°C",
-        humidity: "78%",
-        rainfall: "120 mm",
-        ph: "6.5",
+        temp: "20°C", // Potato thrives in cooler temps than rice
+        humidity: "85%",
+        rainfall: "50 mm",
+        ph: "5.8",    // Slightly acidic soil is good for potatoes
       });
     }
   }, [position]);
 
   const content = {
     ENG: {
-      title: "Rice Disease Detection",
-      uploadTitle: "Upload Leaf Image",
+      title: "Potato Disease Detection",
+      uploadTitle: "Upload Potato Leaf Image",
       clickToUpload: "Click to upload",
       fileType: "SVG, PNG, JPG or GIF (MAX. 5MB)",
       previewTitle: "Image Preview",
@@ -48,8 +48,8 @@ const PdRice = () => {
       locSelected: "Location Selected:",
     },
     BENG: {
-      title: "ধান গাছের রোগ নির্ণয়",
-      uploadTitle: "পাতার ছবি আপলোড করুন",
+      title: "আলু গাছের রোগ নির্ণয়",
+      uploadTitle: "আলু পাতার ছবি আপলোড করুন",
       clickToUpload: "আপলোড করতে ক্লিক করুন",
       fileType: "SVG, PNG, JPG অথবা GIF (সর্বোচ্চ ৫ MB)",
       previewTitle: "ছবির প্রিভিউ",
@@ -65,8 +65,8 @@ const PdRice = () => {
       locSelected: "নির্বাচিত অবস্থান:",
     },
     HINDI: {
-      title: "धान रोग की पहचान",
-      uploadTitle: "पत्ती की छवि अपलोड करें",
+      title: "आलू रोग की पहचान",
+      uploadTitle: "आलू की पत्ती की छवि अपलोड करें",
       clickToUpload: "अपलोड करने के लिए क्लिक करें",
       fileType: "SVG, PNG, JPG या GIF (अधिकतम 5MB)",
       previewTitle: "छवि पूर्वावलोकन",
@@ -93,7 +93,6 @@ const PdRice = () => {
     }
   };
 
-  // --- 3. NAVIGATION HANDLER ---
   const handleAnalyzeClick = () => {
     if (previewUrl) {
       navigate("/result", { state: { image: previewUrl } });
@@ -182,7 +181,7 @@ const PdRice = () => {
           </div>
         </div>
 
-        {/* Action Button - UPDATED to use handleAnalyzeClick */}
+        {/* Action Button */}
         {selectedImage && (
           <div className="flex justify-center mt-8">
             <button 
@@ -247,4 +246,4 @@ const PdRice = () => {
   );
 };
 
-export default PdRice;
+export default PdPotato;

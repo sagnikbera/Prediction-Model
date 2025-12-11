@@ -1,38 +1,44 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Map from "./Map";
-import { FaCloudUploadAlt, FaImage, FaTemperatureHigh, FaTint, FaCloudRain } from "react-icons/fa";
+import {
+  FaCloudUploadAlt,
+  FaImage,
+  FaTemperatureHigh,
+  FaTint,
+  FaCloudRain,
+} from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
 import { PageContext } from "../context/PageContext";
 import { MdDeleteForever } from "react-icons/md";
 
-const PdRice = () => {
+const PdWheat = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  
+
   // State for Map Location and Environment Data
   const [position, setPosition] = useState(null);
   const [envData, setEnvData] = useState(null);
 
   const { lang } = useContext(PageContext);
-  const navigate = useNavigate(); // 2. Initialize Navigation Hook
+  const navigate = useNavigate();
 
-  // --- MOCK DATA FETCHING ---
+  // --- MOCK DATA FETCHING (Adjusted for Wheat - cooler/drier) ---
   useEffect(() => {
     if (position) {
       setEnvData({
-        temp: "32°C",
-        humidity: "78%",
-        rainfall: "120 mm",
-        ph: "6.5",
+        temp: "18°C", // Wheat is often a winter crop
+        humidity: "60%",
+        rainfall: "35 mm",
+        ph: "6.2",
       });
     }
   }, [position]);
 
   const content = {
     ENG: {
-      title: "Rice Disease Detection",
-      uploadTitle: "Upload Leaf Image",
+      title: "Wheat Disease Detection",
+      uploadTitle: "Upload Wheat Leaf Image",
       clickToUpload: "Click to upload",
       fileType: "SVG, PNG, JPG or GIF (MAX. 5MB)",
       previewTitle: "Image Preview",
@@ -48,8 +54,8 @@ const PdRice = () => {
       locSelected: "Location Selected:",
     },
     BENG: {
-      title: "ধান গাছের রোগ নির্ণয়",
-      uploadTitle: "পাতার ছবি আপলোড করুন",
+      title: "গম গাছের রোগ নির্ণয়",
+      uploadTitle: "গম পাতার ছবি আপলোড করুন",
       clickToUpload: "আপলোড করতে ক্লিক করুন",
       fileType: "SVG, PNG, JPG অথবা GIF (সর্বোচ্চ ৫ MB)",
       previewTitle: "ছবির প্রিভিউ",
@@ -65,8 +71,8 @@ const PdRice = () => {
       locSelected: "নির্বাচিত অবস্থান:",
     },
     HINDI: {
-      title: "धान रोग की पहचान",
-      uploadTitle: "पत्ती की छवि अपलोड करें",
+      title: "गेहूं रोग की पहचान",
+      uploadTitle: "गेहूं की पत्ती की छवि अपलोड करें",
       clickToUpload: "अपलोड करने के लिए क्लिक करें",
       fileType: "SVG, PNG, JPG या GIF (अधिकतम 5MB)",
       previewTitle: "छवि पूर्वावलोकन",
@@ -93,7 +99,6 @@ const PdRice = () => {
     }
   };
 
-  // --- 3. NAVIGATION HANDLER ---
   const handleAnalyzeClick = () => {
     if (previewUrl) {
       navigate("/result", { state: { image: previewUrl } });
@@ -102,8 +107,14 @@ const PdRice = () => {
 
   // Helper component for Info Cards
   const InfoCard = ({ icon, label, value, color }) => (
-    <div className="bg-white p-6 rounded-xl shadow-md border-l-4 hover:shadow-xl transition-all duration-300 flex items-center gap-4 group" style={{ borderColor: color }}>
-      <div className={`p-4 rounded-full bg-opacity-10 group-hover:scale-110 transition-transform`} style={{ backgroundColor: color }}>
+    <div
+      className="bg-white p-6 rounded-xl shadow-md border-l-4 hover:shadow-xl transition-all duration-300 flex items-center gap-4 group"
+      style={{ borderColor: color }}
+    >
+      <div
+        className={`p-4 rounded-full bg-opacity-10 group-hover:scale-110 transition-transform`}
+        style={{ backgroundColor: color }}
+      >
         {React.cloneElement(icon, { size: 28, style: { color: color } })}
       </div>
       <div>
@@ -115,7 +126,6 @@ const PdRice = () => {
 
   return (
     <div className="w-full min-h-screen bg-amber-600/40 flex flex-col pb-12">
-      
       {/* UPLOAD SECTION */}
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-green-800 mb-8 text-center">
@@ -159,7 +169,7 @@ const PdRice = () => {
                   alt="Selected Crop"
                   className="max-h-full max-w-full rounded-lg shadow-md object-contain"
                 />
-                
+
                 <button
                   onClick={() => {
                     setSelectedImage(null);
@@ -182,10 +192,10 @@ const PdRice = () => {
           </div>
         </div>
 
-        {/* Action Button - UPDATED to use handleAnalyzeClick */}
+        {/* Action Button */}
         {selectedImage && (
           <div className="flex justify-center mt-8">
-            <button 
+            <button
               onClick={handleAnalyzeClick}
               className="bg-green-700 text-white px-10 py-3 rounded-full text-lg font-bold hover:bg-green-800 shadow-lg hover:scale-105 transition-all"
             >
@@ -208,43 +218,46 @@ const PdRice = () => {
       {/* ENVIRONMENTAL INFO */}
       {position && envData && (
         <div className="container mx-auto px-4 mt-12 animate-fade-in-up pb-10">
-           <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">{text.envTitle}</h2>
-              <p className="text-green-800 font-mono mt-2 bg-white/50 inline-block px-4 py-1 rounded-full">
-                {text.locSelected} {position.lat.toFixed(4)}, {position.lng.toFixed(4)}
-              </p>
-           </div>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">
+              {text.envTitle}
+            </h2>
+            <p className="text-green-800 font-mono mt-2 bg-white/50 inline-block px-4 py-1 rounded-full">
+              {text.locSelected} {position.lat.toFixed(4)},{" "}
+              {position.lng.toFixed(4)}
+            </p>
+          </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              <InfoCard 
-                icon={<FaTemperatureHigh />} 
-                label={text.lblTemp} 
-                value={envData.temp} 
-                color="#ef4444" 
-              />
-              <InfoCard 
-                icon={<FaTint />} 
-                label={text.lblHum} 
-                value={envData.humidity} 
-                color="#3b82f6" 
-              />
-              <InfoCard 
-                icon={<FaCloudRain />} 
-                label={text.lblRain} 
-                value={envData.rainfall} 
-                color="#6366f1" 
-              />
-              <InfoCard 
-                icon={<GiChemicalDrop />} 
-                label={text.lblPh} 
-                value={envData.ph} 
-                color="#10b981" 
-              />
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <InfoCard
+              icon={<FaTemperatureHigh />}
+              label={text.lblTemp}
+              value={envData.temp}
+              color="#ef4444"
+            />
+            <InfoCard
+              icon={<FaTint />}
+              label={text.lblHum}
+              value={envData.humidity}
+              color="#3b82f6"
+            />
+            <InfoCard
+              icon={<FaCloudRain />}
+              label={text.lblRain}
+              value={envData.rainfall}
+              color="#6366f1"
+            />
+            <InfoCard
+              icon={<GiChemicalDrop />}
+              label={text.lblPh}
+              value={envData.ph}
+              color="#10b981"
+            />
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default PdRice;
+export default PdWheat;
