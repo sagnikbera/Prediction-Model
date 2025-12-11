@@ -95,7 +95,7 @@ const Home = () => {
           {/* --- Box 1: Crop Recommendation --- */}
           <Link to="/crop-recommendation" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center mb-3">
-              <FaLeaf className="text-green-800 text-4xl" />
+              <FaLeaf className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.cropTitle}</h2>
             <p className="text-gray-700 text-center font-medium text-sm">
@@ -106,7 +106,7 @@ const Home = () => {
           {/* --- Box 2: Early Disease Prediction (Soil) --- */}
           <Link to="/early-disease-prediction" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center mb-3">
-              <GiPlantRoots className="text-green-800 text-4xl" />
+              <GiPlantRoots className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.earlyTitle}</h2>
             <p className="text-gray-700 text-center font-medium text-sm">
@@ -117,7 +117,7 @@ const Home = () => {
           {/* --- Box 3: Predict Disease (Image) --- */}
           <Link to="/predict-disease" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center mb-3">
-              <GiZigzagLeaf className="text-green-800 text-4xl" />
+              <GiZigzagLeaf className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.predictTitle}</h2>
             <p className="text-gray-700 text-center font-medium text-sm">

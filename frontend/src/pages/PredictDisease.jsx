@@ -79,7 +79,7 @@ const PredictDisease = () => {
           {/* --- Box 1: Rice --- */}
           <Link to="/predict-disease/rice" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
-              <GiGrain className="text-green-800 text-4xl" />
+              <GiGrain className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.riceTitle}</h2>
             <p className="text-gray-700 text-center font-medium">
@@ -90,7 +90,7 @@ const PredictDisease = () => {
           {/* --- Box 2: Potato --- */}
           <Link to="/predict-disease/potato" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
-              <GiPotato className="text-green-800 text-4xl" />
+              <GiPotato className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.potatoTitle}</h2>
             <p className="text-gray-700 text-center font-medium">
@@ -101,7 +101,7 @@ const PredictDisease = () => {
           {/* --- Box 3: Wheat --- */}
           <Link to="/predict-disease/wheat" className={boxClasses}>
             <div className="bg-amber-200 p-4 rounded-full inline-flex items-center justify-center">
-              <GiWheat className="text-green-800 text-4xl" />
+              <GiWheat className="text-green-800 text-4xl animate-bounce" />
             </div>
             <h2 className={titleClasses}>{text.wheatTitle}</h2>
             <p className="text-gray-700 text-center font-medium">
