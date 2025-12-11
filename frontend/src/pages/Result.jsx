@@ -8,7 +8,7 @@ const Result = () => {
   const navigate = useNavigate();
   const { lang } = useContext(PageContext);
 
-  // --- MOCK DATA SIMULATION ---
+  // --- test DATA ---
   const [result, setResult] = useState({
     loading: true,
     score: 0, // 1 = Low Confidence, 2 = Average, 3 = High Confidence
@@ -24,7 +24,7 @@ const Result = () => {
     const timer = setTimeout(() => {
       setResult({
         loading: false,
-        score: 3, // <--- Change this to 1, 2, or 3 to test different confidence levels
+        score: 3, // <---  levels
         description:
           "Based on the visual analysis, the model has detected symptoms consistent with Leaf Blast disease. The lesion patterns strongly match our database. However, please verify with a local expert if symptoms persist.",
       });
@@ -39,31 +39,31 @@ const Result = () => {
       title: "Analysis Result",
       analyzing: "Analyzing Image...",
       back: "Back to Upload",
-      confidenceHeader: "AI Prediction Quality", // Changed Header
-      levels: ["Low Confidence", "Average Confidence", "High Confidence"], // Changed Labels
+      confidenceHeader: "AI Prediction Quality",
+      levels: ["Low Confidence", "Average Confidence", "High Confidence"],
       descTitle: "Diagnosis Report",
     },
     BENG: {
       title: "বিশ্লেষণের ফলাফল",
       analyzing: "ছবি বিশ্লেষণ করা হচ্ছে...",
       back: "ফিরে যান",
-      confidenceHeader: "AI পূর্বাভাসের গুণমান", // Changed Header
-      levels: ["কম নির্ভরযোগ্য", "মাঝারি নির্ভরযোগ্য", "উচ্চ নির্ভরযোগ্য"], // Changed Labels
+      confidenceHeader: "AI পূর্বাভাসের গুণমান", 
+      levels: ["কম নির্ভরযোগ্য", "মাঝারি নির্ভরযোগ্য", "উচ্চ নির্ভরযোগ্য"],
       descTitle: "রোগ নির্ণয়ের রিপোর্ট",
     },
     HINDI: {
       title: "विश्लेषण परिणाम",
       analyzing: "छवि का विश्लेषण...",
       back: "वापस जाएं",
-      confidenceHeader: "AI भविष्यवाणी की गुणवत्ता", // Changed Header
-      levels: ["कम आत्मविश्वास", "औसत आत्मविश्वास", "उच्च आत्मविश्वास"], // Changed Labels
+      confidenceHeader: "AI भविष्यवाणी की गुणवत्ता", 
+      levels: ["कम आत्मविश्वास", "औसत आत्मविश्वास", "उच्च आत्मविश्वास"],
       descTitle: "निदान रिपोर्ट",
     },
   };
 
   const text = content[lang] || content.ENG;
 
-  // --- HELPER FOR STATUS BAR ---
+  // ---  STATUS BAR ---
   const renderStatusBar = () => {
     const { score } = result;
     const baseClass = "h-4 rounded-full transition-all duration-500 flex-1";
@@ -79,13 +79,13 @@ const Result = () => {
 
         {/* The Bar */}
         <div className="flex gap-2 bg-gray-200 p-1 rounded-full h-8 items-center shadow-inner">
-          {/* Level 1: Low Confidence (Red) */}
+          {/*  1 */}
           <div className={`${baseClass} ${score === 1 ? "bg-red-500 shadow-lg scale-105 ring-2 ring-red-300" : "bg-red-200 opacity-40"}`}></div>
           
-          {/* Level 2: Average Confidence (Yellow) */}
+          {/* 2*/}
           <div className={`${baseClass} ${score === 2 ? "bg-yellow-400 shadow-lg scale-105 ring-2 ring-yellow-300" : "bg-yellow-200 opacity-40"}`}></div>
           
-          {/* Level 3: High Confidence (Green) */}
+          {/* 3*/}
           <div className={`${baseClass} ${score === 3 ? "bg-green-500 shadow-lg scale-105 ring-2 ring-green-300" : "bg-green-200 opacity-40"}`}></div>
         </div>
       </div>
@@ -114,7 +114,7 @@ const Result = () => {
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
           
-          {/* --- LEFT: IMAGE --- */}
+          {/* --- LEFT --- */}
           <div className="w-full md:w-1/2 bg-gray-100 p-6 flex justify-center items-center">
              <div className="relative group">
                 <img 
@@ -128,10 +128,10 @@ const Result = () => {
              </div>
           </div>
 
-          {/* --- RIGHT: RESULT INFO --- */}
+          {/* --- RIGHT --- */}
           <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
             
-            {/* Confidence Header */}
+            {/* H */}
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-2 text-gray-400">
                 <FaRobot />
@@ -140,7 +140,7 @@ const Result = () => {
                 </h2>
               </div>
               
-              {/* Dynamic Icon based on score */}
+              {/* ICON */}
               <div className="flex items-center gap-3 mb-4">
                 {result.score === 1 && <FaTimesCircle className="text-red-500 text-5xl" />}
                 {result.score === 2 && <FaExclamationTriangle className="text-yellow-500 text-5xl" />}

@@ -12,7 +12,7 @@ import "leaflet-geosearch/dist/geosearch.css";
 import L from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 
-// Fix for default marker icons
+// icons
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -44,7 +44,6 @@ const SearchField = ({ setPosition }) => {
 
     map.on("geosearch/showlocation", (result) => {
       if (result && result.location) {
-        // Use the prop function to update parent state
         setPosition({
           lat: result.location.y,
           lng: result.location.x,
@@ -58,11 +57,10 @@ const SearchField = ({ setPosition }) => {
   return null;
 };
 
-// --- Click Handler Component ---
+// --- Click Handler ---
 function LocationMarker({ position, setPosition }) {
   useMapEvents({
     click(e) {
-      // Use the prop function to update parent state
       setPosition(e.latlng);
     },
   });
@@ -77,18 +75,14 @@ function LocationMarker({ position, setPosition }) {
   );
 }
 
-// --- MAIN MAP COMPONENT ---
-// Updated to accept position and setPosition as props
+// ------
 const Map = ({ position, setPosition }) => {
-  const defaultPosition = [22.9868, 87.855]; // Default: West Bengal
-
-  // NOTE: We removed the internal useState. 
-  // The parent component (PdRice, EarlyRiskCheck, etc.) must provide these props.
+  const defaultPosition = [22.9868, 87.855]; 
 
   return (
     <div className="h-[85vh] w-full flex flex-col md:flex-row bg-gray-50">
       
-      {/* --- LEFT: MAP CONTAINER --- */}
+      {/* --- LEFT --- */}
       <div className="w-full md:w-2/3 h-full relative z-0">
         <MapContainer
           center={defaultPosition}
@@ -107,7 +101,7 @@ const Map = ({ position, setPosition }) => {
         </MapContainer>
       </div>
 
-      {/* --- RIGHT: SIDEBAR DETAILS --- */}
+      {/* --- RIGHT --- */}
       <div className="w-full md:w-1/3 h-full p-8 flex flex-col justify-center items-center bg-white shadow-l z-10">
         <h2 className="text-3xl font-bold text-green-800 mb-6">
           Location Selector

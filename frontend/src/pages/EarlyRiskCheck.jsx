@@ -60,7 +60,7 @@ const EarlyRiskCheck = () => {
 
       <div className="w-full max-w-6xl px-4 h-[60vh] mb-8">
         <div className="w-full h-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-          {/* We pass setPosition to the Map so it can update the state */}
+          {/* ..... */}
           <Map position={position} setPosition={setPosition} />
         </div>
         <p className="text-center text-sm text-gray-500 mt-2 font-mono">
@@ -78,7 +78,7 @@ const EarlyRiskCheck = () => {
             px-12 py-4 rounded-full text-xl font-bold shadow-xl transition-all transform 
             ${
               position
-                ? "bg-gradient-to-r from-green-600 to-green-800 text-white hover:scale-105 hover:shadow-2xl cursor-pointer"
+                ? "bg-linear-to-r from-green-600 to-green-800 text-white hover:scale-105 hover:shadow-2xl cursor-pointer"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }
           `}
