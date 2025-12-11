@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import homeBgImg from "../assets/homebg.jpg"; // Using the same background
+import homeBgImg from "../assets/homebg.jpg";
 import { PageContext } from "../context/PageContext";
 
 // Importing specific icons for the crops
@@ -28,11 +28,19 @@ const PredictDisease = () => {
       wheatTitle: "গম",
       wheatDesc: "গম গাছের স্বাস্থ্য সমস্যা চিহ্নিত করুন।",
     },
+    HINDI: {
+      pageTitle: "निदान के लिए फसल चुनें",
+      riceTitle: "धान",
+      riceDesc: "धान के पौधों में रोगों का पता लगाएं।",
+      potatoTitle: "आलू",
+      potatoDesc: "आलू की पत्तियों में दोषों का विश्लेषण करें।",
+      wheatTitle: "गेहूं",
+      wheatDesc: "गेहूं में स्वास्थ्य समस्याओं की पहचान करें।",
+    },
   };
 
   const text = content[lang] || content.ENG;
 
-  // Exact same styling classes from Home.jsx
   const boxClasses = `
     flex flex-col justify-center items-center 
     w-full md:w-80 h-52 
@@ -49,7 +57,7 @@ const PredictDisease = () => {
 
   return (
     <div className="relative h-[85vh] w-full flex flex-col justify-center items-center overflow-hidden">
-      {/* BACKGROUND - Same as Home */}
+      {/* BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0 scale-110"
         style={{
@@ -66,7 +74,7 @@ const PredictDisease = () => {
           {text.pageTitle}
         </h1>
 
-        {/* Grid Container - Changed to md:grid-cols-3 to fit 3 boxes */}
+        {/* Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full place-items-center">
           {/* --- Box 1: Rice --- */}
           <Link to="/predict-disease/rice" className={boxClasses}>

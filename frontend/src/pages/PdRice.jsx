@@ -35,6 +35,17 @@ const PdRice = () => {
       analyzeBtn: "ছবি বিশ্লেষণ করুন",
       mapTitle: "খামারের অবস্থান নির্বাচন করুন",
     },
+    HINDI: {
+      title: "धान रोग की पहचान",
+      uploadTitle: "पत्ती की छवि अपलोड करें",
+      clickToUpload: "अपलोड करने के लिए क्लिक करें",
+      fileType: "SVG, PNG, JPG या GIF (अधिकतम 5MB)",
+      previewTitle: "छवि पूर्वावलोकन",
+      clear: "हटाएं",
+      noImage: "कोई छवि चुनी नहीं गई",
+      analyzeBtn: "छवि का विश्लेषण करें",
+      mapTitle: "खेत का स्थान चुनें",
+    },
   };
 
   // 3. Select text based on language
@@ -100,12 +111,9 @@ const PdRice = () => {
                     setSelectedImage(null);
                     setPreviewUrl(null);
                   }}
-                  // Changed positioning to top-2 right-2 for better aesthetics
                   className="absolute top-2 right-2 bg-red-100 text-red-700 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-red-200 transition-colors shadow-sm"
                 >
-                  {/* Added items-center and gap-1 for alignment */}
                   <span className="flex items-center gap-1">
-                    {/* Added size prop to make icon larger */}
                     <MdDeleteForever size={18} />
                     {text.clear}
                   </span>

@@ -39,8 +39,10 @@ const NavBar = () => {
     <nav className="flex justify-between items-center px-8 py-4 bg-yellow-300 shadow-md text-lg">
       {/* Left */}
       <div className="text-4xl font-bold text-green-800 cursor-pointer flex">
-        <SiOverleaf />
-        <span className="ml-2">{text.brand}</span>
+        <Link to="/" className="flex">
+          <SiOverleaf />
+          <span className="ml-2">{text.brand}</span>
+        </Link>
       </div>
 
       {/* Right  */}

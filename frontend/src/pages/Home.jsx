@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaLeaf } from "react-icons/fa";
 import homeBgImg from "../assets/homebg.jpg";
-import { GiZigzagLeaf, GiPlantRoots } from "react-icons/gi"; // Imported GiPlantRoots
+import { GiZigzagLeaf, GiPlantRoots } from "react-icons/gi";
 import { PageContext } from "../context/PageContext";
 import { useUser } from "@clerk/clerk-react";
 
@@ -15,24 +15,26 @@ const Home = () => {
     ENG: {
       cropTitle: "Crop Recommendation",
       cropDesc: "Get analysis based on your soil and climate data.",
-      
-      // New Content for Box 2
       earlyTitle: "Early Risk Check",
       earlyDesc: "Predict disease risks early using soil parameters.",
-
       predictTitle: "Predict Disease",
       predictDesc: "Upload images to identify potential crop diseases.",
     },
     BENG: {
       cropTitle: "ফসলের সুপারিশ",
       cropDesc: "আপনার মাটি এবং আবহাওয়ার তথ্যের ভিত্তিতে বিশ্লেষণ পান।",
-
-      // New Content for Box 2
       earlyTitle: "আগাম সতর্কতা",
       earlyDesc: "মাটির তথ্যের ভিত্তিতে রোগের আগাম ঝুঁকি নির্ণয় করুন।",
-
       predictTitle: "রোগ নির্ণয়",
       predictDesc: "সম্ভাব্য ফসলের রোগ শনাক্ত করতে ছবি আপলোড করুন।",
+    },
+    HINDI: {
+      cropTitle: "फसल सुझाव",
+      cropDesc: "अपनी मिट्टी और जलवायु डेटा के आधार पर विश्लेषण प्राप्त करें।",
+      earlyTitle: "प्रारंभिक जोखिम जांच",
+      earlyDesc: "मिट्टी के मापदंडों का उपयोग करके रोगों का पूर्व अनुमान लगाएं।",
+      predictTitle: "रोग की पहचान",
+      predictDesc: "संभावित फसल रोगों की पहचान करने के लिए चित्र अपलोड करें।",
     },
   };
 
@@ -43,14 +45,18 @@ const Home = () => {
       return isSignedIn && user?.firstName
         ? `Welcome ${user.firstName} to Agri-Assist`
         : "Welcome to Agri-Assist";
+    } else if (lang === "HINDI") {
+      return isSignedIn && user?.firstName
+        ? `एग्री-असिस्ट में आपका स्वागत है, ${user.firstName}`
+        : "एग्री-असिस्ट में आपका स्वागत है";
     } else {
+      // Default to Bengali for 'BENG'
       return isSignedIn && user?.firstName
         ? `এগ্রি-অ্যাসিস্ট-এ স্বাগতম, ${user.firstName}`
         : "এগ্রি-অ্যাসিস্ট-এ আপনাকে স্বাগতম";
     }
   };
 
-  // Adjusted width slightly to ensure 3 boxes fit nicely
   const boxClasses = `
     flex flex-col justify-center items-center 
     w-full h-52 
@@ -83,7 +89,7 @@ const Home = () => {
           {getWelcomeMessage()}
         </h1>
 
-        {/* Updated Grid: 3 Columns on desktop, wider max-width */}
+        {/* Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full place-items-center">
           
           {/* --- Box 1: Crop Recommendation --- */}
