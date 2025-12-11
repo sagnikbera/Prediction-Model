@@ -25,6 +25,12 @@ const NavBar = () => {
       feature: "ফিচার",
       login: "লগ ইন",
     },
+    HINDI: {
+      brand: "एग्री-असिस्ट",
+      home: "होम",
+      feature: "फीचर",
+      login: "लॉग इन",
+    },
   };
 
   const text = navContent[lang] || navContent.ENG;
@@ -65,10 +71,12 @@ const NavBar = () => {
           <option value="BENG" className="font-semibold">
             BENG
           </option>
+          <option value="HINDI" className="font-semibold">
+            HINDI
+          </option>
         </select>
 
         {/* Clerk  */}
-
         <SignedOut>
           <SignInButton mode="modal">
             <button className="bg-green-700 text-white px-4 py-1.5 rounded-full font-bold hover:bg-green-800 transition-all shadow-sm text-base">
