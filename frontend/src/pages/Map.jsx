@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -8,7 +8,7 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import "leaflet-geosearch/dist/geosearch.css"; // Import search CSS
+import "leaflet-geosearch/dist/geosearch.css";
 import L from "leaflet";
 import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 
@@ -24,7 +24,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-// --- Search ---
+// --- Search Component ---
 const SearchField = ({ setPosition }) => {
   const map = useMap();
 
@@ -42,10 +42,9 @@ const SearchField = ({ setPosition }) => {
 
     map.addControl(searchControl);
 
-    // Event listener: When a location is found
     map.on("geosearch/showlocation", (result) => {
       if (result && result.location) {
-        // Update the parent state with the searched location
+        // Use the prop function to update parent state
         setPosition({
           lat: result.location.y,
           lng: result.location.x,
@@ -59,10 +58,11 @@ const SearchField = ({ setPosition }) => {
   return null;
 };
 
-// --- Click Handler ---
-function LocationMarker({ setPosition, position }) {
+// --- Click Handler Component ---
+function LocationMarker({ position, setPosition }) {
   useMapEvents({
     click(e) {
+      // Use the prop function to update parent state
       setPosition(e.latlng);
     },
   });
@@ -77,13 +77,18 @@ function LocationMarker({ setPosition, position }) {
   );
 }
 
-const Map = () => {
+// --- MAIN MAP COMPONENT ---
+// Updated to accept position and setPosition as props
+const Map = ({ position, setPosition }) => {
   const defaultPosition = [22.9868, 87.855]; // Default: West Bengal
-  const [position, setPosition] = useState(null);
+
+  // NOTE: We removed the internal useState. 
+  // The parent component (PdRice, EarlyRiskCheck, etc.) must provide these props.
 
   return (
     <div className="h-[85vh] w-full flex flex-col md:flex-row bg-gray-50">
-      {/* --- MAP --- */}
+      
+      {/* --- LEFT: MAP CONTAINER --- */}
       <div className="w-full md:w-2/3 h-full relative z-0">
         <MapContainer
           center={defaultPosition}
@@ -102,7 +107,7 @@ const Map = () => {
         </MapContainer>
       </div>
 
-      {/* --- RIGHT --- */}
+      {/* --- RIGHT: SIDEBAR DETAILS --- */}
       <div className="w-full md:w-1/3 h-full p-8 flex flex-col justify-center items-center bg-white shadow-l z-10">
         <h2 className="text-3xl font-bold text-green-800 mb-6">
           Location Selector
@@ -139,7 +144,7 @@ const Map = () => {
               alert(`Saved Location: ${position.lat}, ${position.lng}`)
             }
           >
-            Confirm Location
+            Location Confirmed
           </button>
         )}
       </div>
