@@ -41,7 +41,7 @@ function App() {
         <NavBar />
         
         {/* Main content wrapper */}
-        <div className="flex-grow">
+        <div className="grow">
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/predict-disease" element={<PredictDisease />}></Route>

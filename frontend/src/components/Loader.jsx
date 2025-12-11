@@ -11,7 +11,7 @@ const Loader = () => {
           <WiDayRainWind size={80} />
         </div>
 
-        <div className="text-amber-600 animate-pulse mt-[-10px]">
+        <div className="text-amber-600 animate-pulse -mt-2.5">
           <GiGrainBundle size={64} />
         </div>
 
