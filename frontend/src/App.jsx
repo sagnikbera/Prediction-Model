@@ -11,6 +11,8 @@ import PdRice from "./pages/PdRice";
 import Result from "./pages/Result";
 import PdPotato from "./pages/PdPotato";
 import PdWheat from "./pages/PdWheat";
+import EarlyRiskCheck from "./pages/EarlyRiskCheck";
+import ResultEarly from "./pages/ResultEarly";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +27,8 @@ function App() {
           <Route path="/predict-disease/rice" element={<PdRice />}></Route>
           <Route path="/predict-disease/potato" element={<PdPotato />}></Route>
           <Route path="/predict-disease/wheat" element={<PdWheat/>}></Route>
+          <Route path="/early-disease-prediction" element={<EarlyRiskCheck/>}></Route>
+          <Route path="/result-early" element={<ResultEarly />} />
           <Route path="/result" element={<Result/>}></Route>
         </Routes>
         <Footer />
